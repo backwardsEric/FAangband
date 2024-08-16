@@ -76,7 +76,7 @@ borg: $(OBJS) $(BOBJS)
 #
 
 clean:
-	-rm -f $(OBJS) $(EXE) $(EXE).o.i386 $(EXE).o.x86_64 $(EXE).o $(OSX_OBJS)
+	-rm -f $(OBJS) $(EXE) $(EXE).o.arm64 $(EXE).o.x86_64 $(EXE).o $(OSX_OBJS)
 
 
 #
