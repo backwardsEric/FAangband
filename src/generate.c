@@ -61,6 +61,9 @@ bool underworld;
 int wild_vaults;
 
 
+int level_hgt;
+int level_wid;
+
 /**
  * Builds a store at a given pseudo-location
  *

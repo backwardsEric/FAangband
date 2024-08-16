@@ -189,6 +189,6 @@ extern int towns[10];
 extern int extended_towns[10];
 extern int compressed_towns[10];
 extern int race_town_prob[10][14];
-const byte g_info[196];
+extern const byte g_info[196];
 
 #endif /* INCLUDED_MAPMODE_H */

@@ -48,15 +48,6 @@
 #endif
 
 /*
- * Player info
- */
-int player_uid;
-int player_egid;
-
-
-
-
-/*
  * Drop permissions
  */
 void safe_setuid_drop(void)

@@ -258,9 +258,6 @@ void prt(const char *str, int row, int col) {
  * Term_save() / Term_load() do all the heavy lifting here.
  */
 
-/* Depth of the screen_save() stack */
-s16b character_icky;
-
 /*
  * Save the screen, and increase the "icky" depth.
  */

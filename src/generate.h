@@ -225,8 +225,8 @@ struct vault {
  * of the level that might actually contain open squares. It will vary from
  * level to level, unlike the constant.
  */
-int level_hgt;
-int level_wid;
+extern int level_hgt;
+extern int level_wid;
 
 
 /**

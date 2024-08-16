@@ -72,10 +72,10 @@ typedef struct
 
 
 /* squelch.c  */
-tval_desc quality_choices[Q_TV_MAX];
-quality_desc_struct quality_strings[SQUELCH_MAX];
+extern tval_desc quality_choices[Q_TV_MAX];
+extern quality_desc_struct quality_strings[SQUELCH_MAX];
 extern bool squelch_profile[Q_TV_MAX][SQUELCH_MAX];
-tval_desc sval_dependent[S_TV_MAX];
+extern tval_desc sval_dependent[S_TV_MAX];
 void squelch_birth_init(void);
 int get_autoinscription_index(s16b k_idx);
 const char *get_autoinscription(s16b kind_idx);

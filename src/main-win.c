@@ -288,8 +288,6 @@
  */
 #include "win/win-term.h"
 
-bool use_graphics_nice;
-
 /*
  * An array of term_data's
  */
