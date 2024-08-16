@@ -10,7 +10,7 @@ CC = clang
 LD = ld
 OPT ?= -O2
 
-ARCH = -arch i386 -arch x86_64
+ARCH = -arch arm64 -arch x86_64
 WARNINGS = -W -Wall -Wno-unused-parameter -Wno-missing-field-initializers \
 	-Wunused-macros
 JUST_C = -std=c99 -Wdeclaration-after-statement
@@ -61,9 +61,9 @@ OSX_OBJS = main-cocoa.o
 $(EXE).o: $(OBJS)
 	@printf "%10s %-20s\n" LD $@.x86_64
 	@$(LD) -r -arch x86_64 -o $@.x86_64 $(OBJS)
-	@printf "%10s %-20s\n" LD $@.i386
-	@$(LD) -r -arch i386 -o $@.i386 $(OBJS)
-	lipo -arch x86_64 $@.x86_64 -arch i386 $@.i386 -create -output $(PROG).o
+	@printf "%10s %-20s\n" LD $@.arm64
+	@$(LD) -r -arch arm64 -o $@.arm64 $(OBJS)
+	lipo -arch x86_64 $@.x86_64 -arch arm64 $@.arm64 -create -output $(PROG).o
 
 $(EXE): $(EXE).o $(OSX_OBJS)
 	$(DEPLOYMENT_TARGET) $(CC) $(CFLAGS) $(LDFLAGS) -o $(EXE) $(EXE).o $(OSX_OBJS) $(LIBS) 
