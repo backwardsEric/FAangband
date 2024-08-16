@@ -3385,10 +3385,12 @@ static bool cocoa_get_file(const char *suggested_name, char *path, size_t len)
         [menuItem setKeyEquivalentModifierMask: keyModifiers];
         [menuItem setTag: AngbandCommandMenuItemTagBase + tagOffset];
         [self.commandMenu addItem: menuItem];
-        [menuItem release];
 
         NSString *angbandCommand = [item valueForKey: @"AngbandCommand"];
         [angbandCommands setObject: angbandCommand forKey: [NSNumber numberWithInteger: [menuItem tag]]];
+
+        [menuItem release];
+
         tagOffset++;
     }
 
