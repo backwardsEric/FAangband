@@ -53,7 +53,7 @@ jobs:
         run: |
           name=`sed -E -n -e 's/^[[:blank:]]*NAME[[:blank:]]+=[[:blank:]]+//p' src/Makefile.src | tr ' #' '\t\t' | tail -1 | cut -f 1`
           echo "name=$name" >> $GITHUB_OUTPUT
-          prog=`sed -E -n -e 's/^[[:blank:]]*PROGNAME[[:blank:]]+=[[:blank:]]+//p' src/Makefile.src | tr ' #' '\t\t' | tail -1 | cut -f 1`
+          prog=`sed -E -n -e 's/^[[:blank:]]*PROG[[:blank:]]+=[[:blank:]]+//p' src/Makefile.src | tr ' #' '\t\t' | tail -1 | cut -f 1`
           echo "prog=$prog" >> $GITHUB_OUTPUT
 
       - name: Set Release Version
@@ -126,7 +126,12 @@ jobs:
           ./configure
           archive_prefix=${{ steps.store_config.outputs.name }}-${{ steps.store_config.outputs.version }}
           echo "archive_file=${archive_prefix}.tar.gz" >> $GITHUB_OUTPUT
-          make TAG="$archive_prefix" OUT="$archive_prefix".tar.gz dist
+          git checkout-index --prefix="$archive_prefix"/ -a
+          scripts/version.sh > "$archive_prefix"/version
+          "$archive_prefix"/autogen.sh
+          rm -rf "$archive_prefix"/autogen.sh "$archive_prefix"/autom4te.cache
+          tar --exclude .gitignore --exclude .github -czvf "$archive_prefix".tar.gz "$archive_prefix"
+          rm -rf "$archive_prefix"
 
       - name: Create Artifact with Source Archive Path
         run: |
