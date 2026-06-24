@@ -33,13 +33,8 @@ jobs:
       - name: Prepare DOS runtime environment
         run: |
           projname=$(cd src && make -f Makefile.ibm print-project-name | sed -En 's/^our-project-name=//p')
-          mkdir dosroot
-          mkdir dosroot/BIN
-          pushd dosroot/BIN
-          wget --no-verbose https://gitlab.com/FreeDOS/tools/cwsdpmi/-/raw/master/BIN/CWSDPMI.EXE?ref_type=heads
-          popd
-          #wget --no-verbose https://sandmann.dotster.com/cwsdpmi/csdpmi7b.zip
-          #unzip csdpmi7b.zip -d dosroot
+          wget --no-verbose https://github.com/backwardsEric/third-party/raw/refs/heads/main/cwsdpmi/csdpmi7b.zip
+          unzip csdpmi7b.zip -d dosroot
           unzip $projname.zip -d dosroot
 
       - name: DOS runtime smoke test
