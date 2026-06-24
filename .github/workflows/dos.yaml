@@ -33,7 +33,7 @@ jobs:
       - name: Prepare DOS runtime environment
         run: |
           projname=$(cd src && make -f Makefile.ibm print-project-name | sed -En 's/^our-project-name=//p')
-          wget --no-verbose https://github.com/backwardsEric/third-party/raw/refs/heads/main/cwsdpmi/csdpmi7b.zip
+          wget --no-verbose https://github.com/backwardsEric/angband-third-party/raw/refs/heads/main/cwsdpmi/csdpmi7b.zip
           unzip csdpmi7b.zip -d dosroot
           unzip $projname.zip -d dosroot
 
