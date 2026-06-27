@@ -53,7 +53,7 @@ jobs:
           [autoexec]
           mount c dosroot
           c:
-          cwsdpmi
+          BIN\CWSDPMI.EXE
           cd $projname
           echo "Queue keys to create DOSUSER and exit" >> ..\OUT.LOG
           addkey p500 Enter a @ Enter
