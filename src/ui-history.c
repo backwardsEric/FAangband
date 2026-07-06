@@ -41,7 +41,7 @@ void history_display(void)
 	struct history_info *history_list_local = NULL;
 	size_t max_item = history_get_list(player, &history_list_local);
 	int row, wid, hgt, page_size;
-	char buf[120];
+	char buf[PLAYER_NAME_LEN + 106];
 	static size_t first_item = 0;
 	size_t i;
 	bool active = true;
@@ -63,12 +63,14 @@ void history_display(void)
 		print_history_header();
 
 		row = 0;
-		for (i = first_item; row <= page_size && i < max_item; i++)
-		{
+		for (i = first_item; row <= page_size && i < max_item; i++) {
 			strnfmt(buf, sizeof(buf), "%10ld%20s\'  %s",
 					(long)history_list_local[i].turn,
 					level_name(&world->levels[history_list_local[i].place]),
-					history_list_local[i].event);
+					(!hist_has(history_list_local[i].type, HIST_USER_INPUT)) ?
+					history_list_local[i].event	: history_expand_user_input(
+						history_list_local[i].event, player, NULL, 0,
+						true));
 
 			if (hist_has(history_list_local[i].type, HIST_ARTIFACT_LOST))
 				my_strcat(buf, " (LOST)", sizeof(buf));
@@ -131,7 +133,7 @@ void dump_history(ang_file *file)
 	struct history_info *history_list_local = NULL;
 	size_t max_item = history_get_list(player, &history_list_local);
 	size_t i;
-	char buf[120];
+	char buf[PLAYER_NAME_LEN + 106];
 
 	file_putf(file, "[Player history]\n");
 	file_putf(file, "      Turn   Place               Note\n");
@@ -140,7 +142,10 @@ void dump_history(ang_file *file)
 		strnfmt(buf, sizeof(buf), "%10ld%20s\'  %s",
 				(long)history_list_local[i].turn,
 				level_name(&world->levels[history_list_local[i].place]),
-				history_list_local[i].event);
+				(!hist_has(history_list_local[i].type, HIST_USER_INPUT))
+				? history_list_local[i].event
+				: history_expand_user_input(history_list_local[i].event,
+											player, NULL, 0, true));
 
 		if (hist_has(history_list_local[i].type, HIST_ARTIFACT_LOST))
 			my_strcat(buf, " (LOST)", sizeof(buf));
